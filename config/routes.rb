@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :users, only: [:create]
   get "login" => "users#login", :as => "login"
   post "create_login_session" => "users#create_login_session"
+  delete "logout" => "users#logout", :as => "logout"
+  
 
   
   # issues
@@ -23,6 +25,6 @@ Rails.application.routes.draw do
 
   # comments
 
-  post '/issues/:issue_id/comments' => "comments#create"
+  resources :comments, only: [:create]
 
 end

@@ -17,16 +17,29 @@
 				<li><a href="#">placeholder</a></li>
 			</ul>
 			<ul class="nav right">
-				<li><%= link_to "login", login_path %></li>
-				<li><%= link_to "sing up", signup_path %></li>
-			</ul>
+				<% if current_user %>
+					<li><%= link_to current_user.name, "#" %></li>
+					<li><%= link_to "logout", logout_path, method: "delete" %></li>
+				<% else %>
+					<li><%= link_to "login", login_path %></li>
+					<li><%= link_to "signup", signup_path %></li>
+				<% end %>
 		</div>
 	</div>
-<%= yield %>
-<div class="footer">
+	<% if flash.notice %>
+		<div class="notice"><%= flash.notice %></div>
+	<% end %>
+	<%= yield %>
+	<div class="footer">
 		<div class="container">
 			footer
 		</div>
 	</div>
+	<script>
+		var hideNotice = function(){
+			$(".notice").fadeOut("slow");
+		}
+		setTimeout(hideNotice, 4000);
+	</script>
 </body>
 </html>
